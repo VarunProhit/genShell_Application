@@ -2,6 +2,7 @@ import cmd
 import os
 import platform
 import subprocess
+from response  import Command
 # from gen import GenerativeAI
 class MyCLI(cmd.Cmd):
     prompt = '>> '
@@ -11,30 +12,19 @@ class MyCLI(cmd.Cmd):
         """Print a greeting."""
         print("Hello, World!")
     
-    def do_run_command(self, line):
+    def do_run_command(self, line:str):
         """Run an OS command."""
         try:
-            # if platform.system() == 'Windows':
-            #     command = f"cmd /c {line}"  # Use 'cmd /c' prefix for Windows commands
-            # else:
-            #     command = line  # For Unix-like systems, no need for prefix
-            # command = line
-        #     output = os.system(command)
-        #     print(f"Command executed with exit code: {output}")
-        # except Exception as e:
-        #     print(f"Error executing command: {e}")
-         # Use subprocess.run to capture output and return code
-            # generativeAI = GenerativeAI()
-            # re = str(line)
-            # command = generativeAI.generate_response(line)
-            # print("\n n \n"+ command +"\n jn")
-            # process = subprocess.run(command, shell=True, capture_output=True, text=True)
-        
-        #     if process.returncode == 0:
-        #         print(f"Command executed successfully.\nOutput:\n{process.stdout}")
-        #     else:
-        #         print(f"Command failed with error: {process.stderr}")
             print(line)
+            command_gen = Command()
+            command = command_gen.request_command(line)
+            print(command)
+            process = subprocess.run(command, shell=True, capture_output=True, text=True)
+
+            if process.returncode == 0:
+                print(f"Command executed successfully.\nOutput:\n{process.stdout}")
+            else:
+                print(f"Command failed with error: {process.stderr}")
         except Exception as e:
             print(f"Error executing command: {e}")
 
