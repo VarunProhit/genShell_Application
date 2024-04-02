@@ -20,12 +20,12 @@ class MyCLI(cmd.Cmd):
 
     def do_hello(self, line):
         """Print a greeting."""
-        print("Hello, World!")
+        print("Hello, Welcome to GenShell: A AI Based Terminal")
     
     def do_os_command(self, line):
         """Run an OS command."""
         try:
-            print(line)
+            # print(line)
             command_gen = Command()
             command = command_gen.request_command(line)
             print(command)
@@ -41,13 +41,13 @@ class MyCLI(cmd.Cmd):
     def do_run_query(self, line):
         """Run an MySQL query."""
         try:
-            print(line)
+            # print(line)
             command_gen = Command()
             command = command_gen.request_command(line)
-            print("cmd "+command)
+            print(command)
             self.cursor.execute(command)
             result = self.cursor.fetchall()
-            print(Fore.GREEN+result)
+            print(result)
         except mysql.connector.Error as err:
             print(f"Error executing SQL query: {err}")
             
@@ -75,6 +75,7 @@ class MyCLI(cmd.Cmd):
     
     def do_quit(self, line):
         """Exit the CLI."""
+        print("Thanks for using GenShell")
         print(Fore.CYAN+"\nExiting the CLI.")
         return True
 
