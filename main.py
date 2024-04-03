@@ -32,12 +32,11 @@ class MyCLI(cmd.Cmd):
             process = subprocess.run(command, shell=True, capture_output=True, text=True)
 
             if process.returncode == 0:
-                print(Fore.GREEN+f"Command executed successfully.\nOutput:\n{process.stdout}")
+                print(f"{Fore.GREEN} Command executed successfully.\nOutput:\n{process.stdout}")
             else:
-                print(Fore.YELLOW+f"Command failed due to invalid input or having error:"+Fore.RED+ f"{process.stderr}")
+                print(f"{Fore.YELLOW} Command failed due to invalid input or having error:{Fore.RED} {process.stderr}")
         except Exception as e:
-            print(Fore.YELLOW+f"Error executing command: "+ Fore.RED+"f{e}")
-
+            print(f"{Fore.YELLOW} Error executing command: {Fore.RED} {e}")
     def do_run_query(self, line):
         """Run an MySQL query."""
         try:
@@ -70,7 +69,7 @@ class MyCLI(cmd.Cmd):
             )
             self.cursor = self.db_connection.cursor()
         except Exception as e:
-            print(Fore.YELLOW+f"Connection failed with error: "+Fore.RED+f"{e}")
+            print(f"{Fore.YELLOW}Connection failed with error:{Fore.RED} {e}")
     
     
     def do_quit(self, line):
